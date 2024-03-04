@@ -1,0 +1,19 @@
+.navbar-light .navbar-nav .nav-link {
+    color: #ffffff; /* Siyah renkli metin */
+  }
+
+  .navbar-light .navbar-toggler-icon {
+    background-color: #ffffff; /* Siyah renkli hamburger iconu */
+  }
+
+  .navbar-light .navbar-brand {
+    color: #ffffff !important; /* Siyah renkli logo metni */
+  }
+
+  .navbar-light .navbar-brand:hover {
+    color: #ffd700 !important; /* Logo metni üzerine gelindiğinde sarı renk */
+  }
+
+  .navbar-light .navbar-nav .nav-link:hover {
+    color: #ffd700 !important; /* Menü öğeleri üzerine gelindiğinde sarı renk */
+  }

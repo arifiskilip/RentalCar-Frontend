@@ -1,0 +1,33 @@
+<div class="mt-2">
+    <div class="row">
+      <div class="col-md-3">
+        <label for="brand">Marka:</label>
+        <select id="brand" [(ngModel)]="selectedBrand" class="form-control">
+          <option value="">Tümü</option>
+          @for (item of brands || null; track $index) {
+            <option value="{{item.id}}">{{item.name}}</option>
+          } 
+          <!-- Diğer marka seçenekleri -->
+        </select>
+      </div>
+  
+      <div class="col-md-3">
+        <label for="color">Renk:</label>
+        <select id="color"  [(ngModel)]="selectedColor" class="form-control">
+          <option value="">Tümü</option>
+          @for (item of colors || null; track $index) {
+            <option value="{{item.id}}">{{item.name}}</option>
+          }
+          <!-- Diğer renk seçenekleri -->
+        </select>
+      </div>
+  
+      <div class="col-md-3 d-flex align-items-end">
+        <button (click)="createRouterLink()" class="btn btn-primary btn-block">Filtrele</button> 
+      </div>
+  
+      <div class="col-md-3 d-flex align-items-end">
+        <button class="btn btn-secondary btn-block" (click)="clearFilters()">Temizle</button>
+      </div>
+    </div>
+  </div>

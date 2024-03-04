@@ -1,0 +1,49 @@
+
+<div class="container ">
+  
+    <div class="row col-md-12">
+      <div class="col-md-6">
+        <app-cars-filter></app-cars-filter>
+      </div>
+      <div class="col-md-6">
+        <input type="text" [(ngModel)]="searchText" class="form-control mt-4" placeholder="Ara">
+      </div>
+    </div>
+    <!-- car-list.component.html -->
+      <div class="row mt-2">
+        <!-- Araba Kartları -->
+  
+          <div class="col-md-3 mb-4" *ngFor="let car of cars.data |carsSearch:searchText">
+            <div class="card">
+              @if (car.carImages[0]) {
+                <img [src]="tool.genareteImagePath(car.carImages[0].imagePath)" class="card-img-top" alt="Araba Resmi">
+              }
+              @else {
+                <img [src]="tool.genareteImagePath('/Images/default.jpg')" class="card-img-top" alt="Araba Resmi">
+              }
+              <div class="card-body">
+                <h5 class="card-title">{{car.brand.name}}</h5>
+                <p class="card-text">
+                  <i class="fas fa-gas-pump mr-2"></i> Benzin
+                  <br>
+                  <i class="fas fa-cogs mr-2"></i> Otomatik
+                  <br>
+                  <i class="fas fa-road mr-2"></i> 0 km
+                </p>
+                <button class="btn btn-primary" data-toggle="modal" data-target="#detayModal" (click)="openCarDetailModal(car)">Detay</button>
+                <button class="btn btn-success ml-2" (click)= 'cehckCarRental(car.id)' >Kirala</button>
+              </div>
+            </div>
+          </div>
+         <div *ngIf="cars.data.length<1" class="alert alert-info text-center">
+            Veri yok!
+        </div>
+     
+        </div>
+        <!-- Diğer Araba Kartları Eklenir -->
+        <!-- ... -->
+    </div>
+    <!-- Detay Modalı -->
+  
+    <app-car-detail [carDetails]="selectedCarDetails"></app-car-detail>
+  
