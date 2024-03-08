@@ -16,4 +16,12 @@ export class BrandService {
   getAll():Observable<GenericResponse<Brand[]>>{
     return this.http.get<GenericResponse<Brand[]>>(this.url+"api/Brands/GetAll");
   }
+
+  getById(id:number):Observable<GenericResponse<Brand>>{
+    return this.http.get<GenericResponse<Brand>>(this.url+`api/Brands/GetById?id=${id}`);
+  }
+
+  update(brand:Brand):Observable<GenericResponse<null>>{
+    return this.http.post<GenericResponse<null>>(this.url+"api/Brands/Update",brand);
+  }
 }

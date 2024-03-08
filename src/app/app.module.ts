@@ -18,6 +18,8 @@ import { PaymentDetailComponent } from './components/payment-detail/payment-deta
 import { RentCarComponent } from './components/rent-car/rent-car.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
+import { AdminBrandComponent } from './components/admin/admin-brand/admin-brand.component';
+
 
 @NgModule({
   declarations: [
@@ -33,6 +35,7 @@ import { HttpClientModule } from '@angular/common/http';
     PaymentComponent,
     PaymentDetailComponent,
     RentCarComponent,
+    AdminBrandComponent,
   ],
   imports: [
     BrowserModule,

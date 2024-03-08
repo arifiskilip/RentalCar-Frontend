@@ -91,12 +91,10 @@ export class CarsComponent implements OnInit{
 
   cehckCarRental(cardId:number){
      this.rentalService.checkCarRental(cardId).subscribe(res=>{
-        if(res.success){
           this.router.navigateByUrl("rentcar/"+cardId)
-        }
-        else{
-          this.toastr.error(res.message,"HATA");
-        }
+    },err=>{
+      console.log(err)
+      this.toastr.warning(err.error.message)
     })
 }
 
