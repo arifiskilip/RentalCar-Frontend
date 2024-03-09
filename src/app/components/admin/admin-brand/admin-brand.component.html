@@ -11,24 +11,24 @@
         <tr *ngFor="let brand of brands">
           <td>{{brand.name}}</td>
           <td>
-            <button type="button" class="btn btn-warning" (click)="getById(brand.id)" data-toggle="modal" data-target="#exampleModal"><i class="fas fa-edit"></i></button>
-            <button type="button" class="btn btn-danger"><i class="fas fa-trash"></i></button>
+            <button type="button" class="btn btn-warning" (click)="getById(brand.id)" data-toggle="modal" data-target="#updateModal"><i class="fas fa-edit"></i></button>
+            <button type="button" class="btn btn-danger" [swal]="deleteSwal" (click)="getById(brand.id)"><i class="fas fa-trash"></i></button>
           </td>
         </tr>
         <!-- Diğer renkler buraya eklenir -->
       </tbody>
   
     </table>
-        <button class="btn btn-outline-success">Ekle</button>
+        <button class="btn btn-outline-success" data-toggle="modal" data-target="#addModal">Ekle</button>
 
 
         <!-- Update modal -->
-        <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal fade" id="updateModal" tabindex="-1" role="dialog" aria-labelledby="updateModalLabel" aria-hidden="true">
             <div class="modal-dialog" role="document">
-              <form [formGroup]="brandUpdateForm">
+              <form [formGroup]="brandForm">
                 <div class="modal-content">
                   <div class="modal-header">
-                    <h5 class="modal-title" id="exampleModalLabel">Modal title</h5>
+                    <h5 class="modal-title" id="updateModalLabel">Marka Güncelle</h5>
                     <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                       <span aria-hidden="true">&times;</span>
                     </button>
@@ -40,10 +40,49 @@
                     </div>
                   </div>
                   <div class="modal-footer">
-                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                    <button type="button" class="btn btn-primary" (click)="update()" id="submitBtn">Save changes</button>
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">İptal</button>
+                    <button type="button" class="btn btn-primary" (click)="update()" id="submitBtn">Güncelle</button>
                   </div>
                 </div>  
               </form>
             </div>
           </div>
+
+          <!-- delete swal brand -->
+          <swal
+  #deleteSwal
+  title="Silmek istediğinizden eminmisiniz ?"
+  text="{{getBrand.name}} adlı marka silinecektir."
+  icon="question"
+  [showCancelButton]="true"
+  [focusCancel]="true"
+  cancelButtonText="Hayır"
+  confirmButtonText="Evet"
+  (confirm)="deleteBrand(getBrand)">
+</swal>
+
+  <!-- Add Modal -->
+  <div class="modal fade" id="addModal" tabindex="-1" role="dialog" aria-labelledby="addModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+      <form [formGroup]="brandForm">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title" id="addModalLabel">Marka Ekle</h5>
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+              <span aria-hidden="true">&times;</span>
+            </button>
+          </div>
+          <div class="modal-body">
+            <div class="mb-3">
+              <label for="brandName">Marka</label>
+              <input type="text" formControlName="name" class="form-control" id="brandName" required>
+            </div>
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-secondary" data-dismiss="modal">İptal</button>
+            <button type="button" class="btn btn-primary" (click)="add()" id="submitBtn">Ekle</button>
+          </div>
+        </div>  
+      </form>
+    </div>
+  </div>

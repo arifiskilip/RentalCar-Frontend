@@ -19,6 +19,8 @@ import { RentCarComponent } from './components/rent-car/rent-car.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
 import { AdminBrandComponent } from './components/admin/admin-brand/admin-brand.component';
+import { SweetAlert2Module } from '@sweetalert2/ngx-sweetalert2';
+import { AdminColorComponent } from './components/admin/admin-color/admin-color.component';
 
 
 @NgModule({
@@ -36,6 +38,7 @@ import { AdminBrandComponent } from './components/admin/admin-brand/admin-brand.
     PaymentDetailComponent,
     RentCarComponent,
     AdminBrandComponent,
+    AdminColorComponent,
   ],
   imports: [
     BrowserModule,
@@ -44,7 +47,8 @@ import { AdminBrandComponent } from './components/admin/admin-brand/admin-brand.
     ReactiveFormsModule,
     HttpClientModule,
     BrowserAnimationsModule, // required animations module
-    ToastrModule.forRoot()
+    ToastrModule.forRoot(),
+    SweetAlert2Module.forRoot(),
   ],
   providers: [],
   bootstrap: [AppComponent]

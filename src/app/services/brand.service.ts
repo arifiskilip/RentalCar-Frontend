@@ -24,4 +24,11 @@ export class BrandService {
   update(brand:Brand):Observable<GenericResponse<null>>{
     return this.http.post<GenericResponse<null>>(this.url+"api/Brands/Update",brand);
   }
+  delete(id:number):Observable<GenericResponse<null>>{
+    return this.http.post<GenericResponse<null>>(this.url+'api/Brands/Delete?id='+id,null)
+  }
+
+  add(brand:Brand):Observable<GenericResponse<Brand>>{
+    return this.http.post<GenericResponse<Brand>>(this.url+"api/Brands/Add",brand);
+  }
 }

@@ -5,6 +5,8 @@ import { PaymentComponent } from './components/payment/payment.component';
 import { RentCarComponent } from './components/rent-car/rent-car.component';
 import { PaymentDetailComponent } from './components/payment-detail/payment-detail.component';
 import { AdminBrandComponent } from './components/admin/admin-brand/admin-brand.component';
+import { AdminColorComponent } from './components/admin/admin-color/admin-color.component';
+
 
 const routes: Routes = [
   {path:"",component:CarsComponent},
@@ -15,6 +17,7 @@ const routes: Routes = [
 {path:"payment",component:PaymentComponent},
 {path:"paymentdetail/:rentalId",component:PaymentDetailComponent},
 {path:"admin/brands",component:AdminBrandComponent},
+{path:"admin/colors",component:AdminColorComponent},
 ];
 
 @NgModule({

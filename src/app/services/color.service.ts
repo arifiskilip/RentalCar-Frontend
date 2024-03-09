@@ -16,4 +16,18 @@ export class ColorService {
   getAll():Observable<GenericResponse<Color[]>>{
     return this.http.get<GenericResponse<Color[]>>(this.url+"api/Colors/GetAll");
   }
+  getById(id:number):Observable<GenericResponse<Color>>{
+    return this.http.get<GenericResponse<Color>>(this.url+`api/Colors/GetById?id=${id}`);
+  }
+
+  update(color:Color):Observable<GenericResponse<null>>{
+    return this.http.post<GenericResponse<null>>(this.url+"api/Colors/Update",color);
+  }
+  delete(id:number):Observable<GenericResponse<null>>{
+    return this.http.post<GenericResponse<null>>(this.url+'api/Colors/Delete?id='+id,null)
+  }
+
+  add(color:Color):Observable<GenericResponse<Color>>{
+    return this.http.post<GenericResponse<Color>>(this.url+"api/Colors/Add",color);
+  }
 }

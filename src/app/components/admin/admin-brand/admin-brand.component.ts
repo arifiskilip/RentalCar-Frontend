@@ -11,14 +11,14 @@ import { ToastrService } from 'ngx-toastr';
 })
 export class AdminBrandComponent implements OnInit {
   ngOnInit(): void {
-    this.createBrandUpdateForm();
+    this.createBrandForm();
     this.getAll();
     
   }
 
   brands:Brand[];
   getBrand:Brand = new Brand();
-  brandUpdateForm:FormGroup;
+  brandForm:FormGroup;
 
   /**
    *
@@ -26,16 +26,17 @@ export class AdminBrandComponent implements OnInit {
   constructor(private brandService:BrandService, private formBuilder:FormBuilder, private toastr:ToastrService) {
   }
 
-  createBrandUpdateForm(){
-    this.brandUpdateForm = this.formBuilder.group({
+  createBrandForm(){
+    this.brandForm = this.formBuilder.group({
       id:[""],
       name:["",Validators.required]
     })
   }
 
+
   update(){
-    if(this.brandUpdateForm.valid){
-      let updateBrand:Brand = Object.assign({},this.brandUpdateForm.value);
+    if(this.brandForm.valid){
+      let updateBrand:Brand = Object.assign({},this.brandForm.value);
       console.log(updateBrand)
       this.brandService.update(updateBrand).subscribe(res=>{
         this.getAll();
@@ -60,10 +61,35 @@ export class AdminBrandComponent implements OnInit {
   getById(id:number){
     this.brandService.getById(id).subscribe(res=>{
       this.getBrand = res.data
-      this.brandUpdateForm.get('name')?.setValue(res.data.name);
-      this.brandUpdateForm.get('id')?.setValue(res.data.id);
+      this.brandForm.get('name')?.setValue(res.data.name);
+      this.brandForm.get('id')?.setValue(res.data.id);
       console.log(this.getBrand)
     },err=> console.log(err));
   }
 
+  deleteBrand(brand:Brand){
+    this.brandService.delete(brand.id).subscribe(res=>{
+      this.toastr.success(res.message,"Başarılı")
+      this.getAll();
+    },err=>console.log(err))
+  }
+
+  add(){
+    if(this.brandForm.valid){
+      let addedBrand:Brand = Object.assign({},this.brandForm.value);
+      addedBrand.id=0;
+      console.log(addedBrand)
+      this.brandService.add(addedBrand).subscribe(res=>{
+        this.getAll();
+        this.toastr.success(res.message,"Başarılı!")
+        
+      },err=>{
+        console.log(err)
+        this.toastr.error(err.message);
+      })
+    }
+    else{
+      this.toastr.warning("Marka adı boş geçilemez.","Uyarı")
+    }
+  }
 }
