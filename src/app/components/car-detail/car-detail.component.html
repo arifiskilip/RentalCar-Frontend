@@ -12,15 +12,18 @@
             <div id="carouselExample" class="carousel slide" data-ride="carousel">
               <div class="carousel-inner">
                 
-                 
+                 @if (carDetails.carImages.length>=1) {
                   <div *ngFor="let item of carDetails.carImages; let first = first; let i = index" class="carousel-item" [class.active]="first">
                     <img [src]="tool.genareteImagePath(item.imagePath)" class="d-block w-100" alt="Resim 1" data-toggle="modal" data-target="#imageModal">
-                   </div>
-                  @if (!carDetails.carImages) {
-                      <div class="carousel-item">
-                      <img [src]="tool.genareteImagePath('/Images/default.jpg')" class="d-block w-100" alt="Resim 1" data-toggle="modal" data-target="#imageModal">
-                      </div>
-                    }
+                   </div>   
+                 }
+                 @else {
+                  <div class="carousel-item active">
+                    <img [src]="tool.genareteImagePath('/Images/default.jpg')" class="d-block w-100" alt="Resim 1" data-toggle="modal" data-target="#imageModal">
+                    </div>
+                 }
+                 
+               
                               
                   
               </div>

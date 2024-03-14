@@ -21,6 +21,8 @@ import { HttpClientModule } from '@angular/common/http';
 import { AdminBrandComponent } from './components/admin/admin-brand/admin-brand.component';
 import { SweetAlert2Module } from '@sweetalert2/ngx-sweetalert2';
 import { AdminColorComponent } from './components/admin/admin-color/admin-color.component';
+import { AdminCarComponent } from './components/admin/admin-car/admin-car.component';
+import { AdminCarImagesComponent } from './components/admin/admin-car-images/admin-car-images.component';
 
 
 @NgModule({
@@ -39,6 +41,8 @@ import { AdminColorComponent } from './components/admin/admin-color/admin-color.
     RentCarComponent,
     AdminBrandComponent,
     AdminColorComponent,
+    AdminCarComponent,
+    AdminCarImagesComponent,
   ],
   imports: [
     BrowserModule,

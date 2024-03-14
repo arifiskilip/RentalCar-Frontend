@@ -32,4 +32,14 @@ export class CarService {
   getCarById(carId:number):Observable<GenericResponse<Car>>{
     return this.http.get<GenericResponse<Car>>(this.url+`api/Cars/GetCarById?carId=${carId}`);
   }
+  update(car:Car):Observable<GenericResponse<null>>{
+    return this.http.post<GenericResponse<null>>(this.url+"api/Cars/Update",car);
+  }
+  delete(id:number):Observable<GenericResponse<null>>{
+    return this.http.post<GenericResponse<null>>(this.url+'api/Cars/Delete?id='+id,null)
+  }
+
+  add(car:Car):Observable<GenericResponse<Car>>{
+    return this.http.post<GenericResponse<Car>>(this.url+"api/Cars/Add",car);
+  }
 }

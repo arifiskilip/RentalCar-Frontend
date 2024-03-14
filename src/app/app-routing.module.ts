@@ -6,6 +6,8 @@ import { RentCarComponent } from './components/rent-car/rent-car.component';
 import { PaymentDetailComponent } from './components/payment-detail/payment-detail.component';
 import { AdminBrandComponent } from './components/admin/admin-brand/admin-brand.component';
 import { AdminColorComponent } from './components/admin/admin-color/admin-color.component';
+import { AdminCarComponent } from './components/admin/admin-car/admin-car.component';
+import { AdminCarImagesComponent } from './components/admin/admin-car-images/admin-car-images.component';
 
 
 const routes: Routes = [
@@ -18,6 +20,8 @@ const routes: Routes = [
 {path:"paymentdetail/:rentalId",component:PaymentDetailComponent},
 {path:"admin/brands",component:AdminBrandComponent},
 {path:"admin/colors",component:AdminColorComponent},
+{path:"admin/cars",component:AdminCarComponent},
+{path:"admin/car/:carId/images",component:AdminCarImagesComponent},
 ];
 
 @NgModule({

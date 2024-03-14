@@ -1,0 +1,77 @@
+<div class="container mt-5">
+    <h1 class="mb-4">Ürün Resimleri</h1>
+  
+    @if (carImages) {
+      <div class="row" id="image-gallery">
+      @for (carImage of carImages; track $index) {
+       
+          <!-- Örnek bir ürün kartı -->
+          <div class="col-lg-3 col-md-4 col-sm-6 mb-3">
+            <div class="card">
+              <img src="{{tool.genareteImagePath(carImage.imagePath)}}" class="card-img-top" alt="...">
+              <div class="card-body">
+                <button class="btn btn-danger btn-sm float-right delete-image" (click)="setCarImage(carImage)" 
+                data-toggle="modal" data-target="#deleteModal">&#x2716;</button>
+              </div>
+            </div>
+          </div>
+          <!-- Örnek bir ürün kartı sonu -->
+      
+      }
+    </div>
+    }
+    @else {
+      <div class="alert alert-info tex-center">
+        İlgili araca ait resim bulunadı!
+      </div>
+    }
+  <button class="btn btn-outline-success" data-toggle="modal" data-target="#addModal">Ekle</button>
+    <!-- Silme işlemi için modal -->
+    <div class="modal fade" id="deleteModal" tabindex="-1" role="dialog" aria-labelledby="deleteModalLabel" aria-hidden="true">
+      <div class="modal-dialog" role="document">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title" id="deleteModalLabel">Resmi Sil</h5>
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+              <span aria-hidden="true">&times;</span>
+            </button>
+          </div>
+          <div class="modal-body">
+           Resmi silmek istediğinizden emin misiniz?
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-secondary" data-dismiss="modal">Kapat</button>
+            <button type="button" class="btn btn-danger" (click)="deleteCarImage()" id="confirmDelete">Sil</button>
+          </div>
+        </div>
+      </div>
+    </div>
+    <!-- Modal sonu -->
+     <!-- Ekleme işlemi için modal -->
+     <div class="modal fade" id="addModal" tabindex="-1" role="dialog" aria-labelledby="addModalLabel" aria-hidden="true">
+      <div class="modal-dialog" role="document">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title" id="addModalLabel">Resmi Sil</h5>
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+              <span aria-hidden="true">&times;</span>
+            </button>
+          </div>
+          <form [formGroup]="carImageForm">
+            <div class="modal-body">
+              <div class="form-group">
+                <label id="imagePath">Eklemek İstediğiniz Resmi Seçin:</label>
+                <input type="file" accept="/image*" formControlName="imagePath" class="form-control">
+              </div>
+              </div>
+              <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Kapat</button>
+                <button type="button" class="btn btn-primary" (click)="add()" id="submitBtn">Ekle</button>
+              </div>
+          </form>
+        </div>
+      </div>
+    </div>
+    <!-- Modal sonu -->
+  
+  </div>

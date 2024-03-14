@@ -1,0 +1,147 @@
+<div class="container">
+    <h2 class="text-center">Araç Renkleri</h2>
+    <table class="table table-striped table-bordered">
+      <thead>
+        <tr>
+          <th scope="col">Marka</th>
+          <th scope="col">Model</th>
+          <th scope="col">Renk</th>
+          <th scope="col">Yıl</th>
+          <th scope="col">Günlük Fiyat</th>
+          <th scope="col">Açıklama</th>
+          <th scope="col">Aksiyonlar</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let car of cars">
+          <td>{{car.brand.name}}</td>
+          <td>{{car.modelName}}</td>
+          <td>{{car.color.name}}</td>
+          <td>{{car.modelYear}}</td>
+          <td>{{car.dailyPrice}}</td>
+          <td>{{car.description}}</td>
+          <td>
+            <button type="button" class="btn btn-warning" (click)="getById(car.id)" data-toggle="modal" data-target="#updateModal"><i class="fas fa-edit"></i></button>
+            <button type="button" class="btn btn-danger" [swal]="deleteSwal" (click)="getById(car.id)"><i class="fas fa-trash"></i></button>
+            <a type="button" routerLink="/admin/car/{{car.id}}/images" class="btn btn-primary"><i class="fas fa-image"></i></a>
+          </td>
+        </tr>
+        <!-- Diğer renkler buraya eklenir -->
+      </tbody>
+  
+    </table>
+        <button class="btn btn-outline-success" data-toggle="modal" (click)="clearCarForm()" data-target="#addModal">Ekle</button>
+  
+  
+        <!-- Update modal -->
+        <div class="modal fade" id="updateModal" tabindex="-1" role="dialog" aria-labelledby="updateModalLabel" aria-hidden="true">
+            <div class="modal-dialog" role="document">
+              <form [formGroup]="carForm">
+                <div class="modal-content">
+                  <div class="modal-header">
+                    <h5 class="modal-title" id="updateModalLabel">Araba Güncelle</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                      <span aria-hidden="true">&times;</span>
+                    </button>
+                  </div>
+                  <div class="modal-body">
+                    <div class="mb-3">
+                      <label for="brandId">Marka</label>
+                      <select id="brandId" class="form-control" formControlName="brandId" required>
+                        <option *ngFor="let brand of brands" [value]="brand.id">{{brand.name}}</option>
+                      </select>
+                    </div>
+                    <div class="mb-3">
+                      <label for="colorId">Renk</label>
+                      <select id="colorId" class="form-control" formControlName="colorId" required>
+                        <option *ngFor="let color of colors" [value]="color.id">{{color.name}}</option>
+                      </select>
+                    </div>
+                    <div class="mb-3">
+                      <label for="modelName">Model</label>
+                      <input id="modelName" class="form-control" formControlName="modelName" required/>
+                    </div>
+                    <div class="mb-3">
+                      <label for="modelYear">Yıl</label>
+                      <input id="modelYear" class="form-control" formControlName="modelYear" required/>
+                    </div>
+                    <div class="mb-3">
+                      <label for="dailyPrice">Fiyat</label>
+                      <input id="dailyPrice" class="form-control" formControlName="dailyPrice" required/>
+                    </div>
+                    <div class="mb-3">
+                      <label for="description">Açıklama</label>
+                      <input id="description" class="form-control" formControlName="description" required/>
+                    </div>
+                  </div>
+                  <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">İptal</button>
+                    <button type="button" class="btn btn-primary" (click)="update()" id="submitBtn">Güncelle</button>
+                  </div>
+                </div>  
+              </form>
+            </div>
+          </div>
+  
+          <!-- delete swal brand -->
+          <swal
+  #deleteSwal
+  title="Silmek istediğinizden eminmisiniz ?"
+  text="{{getCar.modelName}} adlı marka silinecektir."
+  icon="question"
+  [showCancelButton]="true"
+  [focusCancel]="true"
+  cancelButtonText="Hayır"
+  confirmButtonText="Evet"
+  (confirm)="deleteCar(getCar)">
+  </swal>
+  
+  <!-- Add Modal -->
+  <div class="modal fade" id="addModal" tabindex="-1" role="dialog" aria-labelledby="addModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+      <form [formGroup]="carForm">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title" id="addModalLabel">Renk Ekle</h5>
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+              <span aria-hidden="true">&times;</span>
+            </button>
+          </div>
+          <div class="modal-body">
+            <div class="mb-3">
+              <label for="brandId">Marka</label>
+              <select id="brandId" class="form-control" formControlName="brandId" required>
+                <option *ngFor="let brand of brands" [value]="brand.id">{{brand.name}}</option>
+              </select>
+            </div>
+            <div class="mb-3">
+              <label for="colorId">Renk</label>
+              <select id="colorId" class="form-control" formControlName="colorId" required>
+                <option *ngFor="let color of colors" [value]="color.id">{{color.name}}</option>
+              </select>
+            </div>
+            <div class="mb-3">
+              <label for="modelName">Model</label>
+              <input id="modelName" class="form-control" formControlName="modelName" required/>
+            </div>
+            <div class="mb-3">
+              <label for="modelYear">Yıl</label>
+              <input id="modelYear" class="form-control" formControlName="modelYear" required/>
+            </div>
+            <div class="mb-3">
+              <label for="dailyPrice">Fiyat</label>
+              <input id="dailyPrice" class="form-control" formControlName="dailyPrice" required/>
+            </div>
+            <div class="mb-3">
+              <label for="description">Açıklama</label>
+              <input id="description" class="form-control" formControlName="description" required/>
+            </div>
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-secondary" data-dismiss="modal">İptal</button>
+            <button type="button" class="btn btn-primary" (click)="add()" id="submitBtn">Ekle</button>
+          </div>
+        </div>  
+      </form>
+    </div>
+  </div>

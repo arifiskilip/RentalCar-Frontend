@@ -55,7 +55,8 @@ export class PaymentComponent implements OnInit {
           console.log(err);
         });
       },err =>{
-       console.log(err.error);
+        console.log(err);
+        this.toastr.error(err.error.message, "Hata");
       });
     } else {
       this.toastr.warning("Tüm alanları doldurunuz!", "Uyarı");
