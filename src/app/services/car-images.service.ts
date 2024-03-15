@@ -27,7 +27,11 @@ export class CarImagesService {
     );
   }
 
-  add(carImage:CarImage){
-    return this.http.post<GenericResponse<CarImage>>(this.url+"api/CarImages/Add",carImage);
+  add(carId:number,file:File){
+    const formData:FormData = new FormData();
+    formData.append("carId",carId.toString());
+    formData.append("file",file);
+    console.log(formData.get("file"))
+    return this.http.post<GenericResponse<CarImage>>(this.url+"api/CarImages/Add",formData);
   }
 }

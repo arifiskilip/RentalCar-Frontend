@@ -57,11 +57,11 @@
               <span aria-hidden="true">&times;</span>
             </button>
           </div>
-          <form [formGroup]="carImageForm">
+          <form>
             <div class="modal-body">
               <div class="form-group">
                 <label id="imagePath">Eklemek İstediğiniz Resmi Seçin:</label>
-                <input type="file" accept="/image*" formControlName="imagePath" class="form-control">
+                <input type="file" accept="/image*" (change)="onFileSelected($event)" class="form-control">
               </div>
               </div>
               <div class="modal-footer">

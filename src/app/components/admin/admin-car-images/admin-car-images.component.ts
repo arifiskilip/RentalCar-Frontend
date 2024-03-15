@@ -15,8 +15,8 @@ export class AdminCarImagesComponent implements OnInit {
   ngOnInit(): void {
     this.activatedRoute.params.subscribe(params=>{
       if(params['carId']){
-        this.createCarImageForm();
-        this.getCarCarIdByCarImages(params['carId']);
+        this.carId = params['carId']
+        this.getCarCarIdByCarImages(this.carId);
       }
     })
   }
@@ -24,23 +24,14 @@ export class AdminCarImagesComponent implements OnInit {
   tool:Tools = new Tools();
   carImages:CarImage[];
   carImage:CarImage = new CarImage();
-  carImageForm:FormGroup;
+  file: File;
+  carId:number;
   /**
    *
    */
   constructor(private carImagesService:CarImagesService,
-    private activatedRoute:ActivatedRoute, private toastr:ToastrService,
-    private formBuilder:FormBuilder) {
+    private activatedRoute:ActivatedRoute, private toastr:ToastrService) {
     
-  }
-
-
-  createCarImageForm(){
-    this.carImageForm = this.formBuilder.group({
-      id:[''],
-      carId:[''],
-      imagePath:['',Validators.required]
-    });
   }
 
   getCarCarIdByCarImages(carId:number){
@@ -61,18 +52,22 @@ export class AdminCarImagesComponent implements OnInit {
     },err=> this.toastr.error(err.error.message,"Hata"));
   }
 
-  add(){
-    if(this.carImageForm.valid){
-      this.activatedRoute.params.subscribe(params=>{
-        this.carImageForm.get('carId')?.setValue(params['carId']);
-        let addedCarImage:CarImage = Object.assign({},this.carImageForm.value);
-        this.carImagesService.add(addedCarImage).subscribe(res=>{
-          this.toastr.success(res.message,"Başarılı")
-        },err=> this.toastr.error(err.error.message,"Hata"))
-        this.getCarCarIdByCarImages(params['carId'])
+  add(){  
+    if(this.file){
+      this.carImagesService.add(this.carId,this.file).subscribe(res=>{
+        this.toastr.success(res.message,"Başarılı");
+        this.getCarCarIdByCarImages(this.carId);
+      },err=>{
+        this.toastr.error(err.error.message,"Hata");
       })
-      
-      
+    }
+    else{
+      this.toastr.warning("Lütfen bir resim seçiniz","Uyarı");
     }
   }
+
+  // Dosya seçildiğinde bu fonksiyon çağrılabilir
+onFileSelected(event: any) {
+    this.file = event.target.files[0];
+}
 }
