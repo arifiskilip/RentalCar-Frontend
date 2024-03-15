@@ -17,12 +17,16 @@ import { PaymentComponent } from './components/payment/payment.component';
 import { PaymentDetailComponent } from './components/payment-detail/payment-detail.component';
 import { RentCarComponent } from './components/rent-car/rent-car.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
-import { HttpClientModule } from '@angular/common/http';
+import { HTTP_INTERCEPTORS, HttpClientModule } from '@angular/common/http';
 import { AdminBrandComponent } from './components/admin/admin-brand/admin-brand.component';
 import { SweetAlert2Module } from '@sweetalert2/ngx-sweetalert2';
 import { AdminColorComponent } from './components/admin/admin-color/admin-color.component';
 import { AdminCarComponent } from './components/admin/admin-car/admin-car.component';
 import { AdminCarImagesComponent } from './components/admin/admin-car-images/admin-car-images.component';
+import { AccountLayoutComponent } from './components/account/account-layout/account-layout.component';
+import { AccountLoginComponent } from './components/account/account-login/account-login.component';
+import { AccountRegisterComponent } from './components/account/account-register/account-register.component';
+import { AuthInterceptor } from './interceptors/auth.interceptor';
 
 
 @NgModule({
@@ -43,6 +47,9 @@ import { AdminCarImagesComponent } from './components/admin/admin-car-images/adm
     AdminColorComponent,
     AdminCarComponent,
     AdminCarImagesComponent,
+    AccountLayoutComponent,
+    AccountLoginComponent,
+    AccountRegisterComponent,
   ],
   imports: [
     BrowserModule,
@@ -54,7 +61,7 @@ import { AdminCarImagesComponent } from './components/admin/admin-car-images/adm
     ToastrModule.forRoot(),
     SweetAlert2Module.forRoot(),
   ],
-  providers: [],
+  providers: [ { provide: HTTP_INTERCEPTORS, useClass: AuthInterceptor, multi: true }],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
