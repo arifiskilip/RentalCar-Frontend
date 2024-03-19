@@ -28,15 +28,17 @@
               <li class="list-group-item list-group-item-action">Veri yok</li>
             }
           </div>
-             <!-- Admin List group -->
-             <a href="#adminMenu" class="list-group-item list-group-item-action mt-2" data-toggle="collapse">
-              <i class="fas fa-solid fa-paint-roller mr-2"></i> Admin Menu
-            </a>
-            <div class="collapse" id="adminMenu">
-              <a routerLink="/admin/cars" class="list-group-item list-group-item-action">Araçlar</a>
-              <a routerLink="/admin/colors" class="list-group-item list-group-item-action">Renkler</a>
-              <a routerLink="/admin/brands" class="list-group-item list-group-item-action">Markalar</a>
-            </div>      
+           <div *ngIf="auth.hasRole('admin')">
+              <!-- Admin List group -->
+              <a href="#adminMenu" class="list-group-item list-group-item-action mt-2" data-toggle="collapse">
+                <i class="fas fa-solid fa-user-tie mr-2"></i> Admin Menu
+              </a>
+              <div class="collapse" id="adminMenu">
+                <a routerLink="/admin/cars" class="list-group-item list-group-item-action">Araçlar</a>
+                <a routerLink="/admin/colors" class="list-group-item list-group-item-action">Renkler</a>
+                <a routerLink="/admin/brands" class="list-group-item list-group-item-action">Markalar</a>
+              </div>   
+           </div>   
         </div>
     </div>
   </div>

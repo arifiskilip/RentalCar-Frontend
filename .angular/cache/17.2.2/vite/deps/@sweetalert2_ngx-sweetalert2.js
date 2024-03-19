@@ -1,7 +1,7 @@
 import {
   CommonModule,
   NgTemplateOutlet
-} from "./chunk-TLZQMRMA.js";
+} from "./chunk-HHZ4FQTA.js";
 import {
   ApplicationRef,
   ChangeDetectionStrategy,
@@ -36,14 +36,14 @@ import {
   ɵɵlistener,
   ɵɵproperty,
   ɵɵtemplate
-} from "./chunk-4UR7XNZI.js";
+} from "./chunk-BITAGTGM.js";
 import {
   __async,
   __spreadProps,
   __spreadValues
 } from "./chunk-WKYGNSYM.js";
 
-// ../../../node_modules/@sweetalert2/ngx-sweetalert2/fesm2022/sweetalert2-ngx-sweetalert2.mjs
+// node_modules/@sweetalert2/ngx-sweetalert2/fesm2022/sweetalert2-ngx-sweetalert2.mjs
 function SwalPortalComponent_ng_container_0_Template(rf, ctx) {
   if (rf & 1) {
     ɵɵelementContainer(0);
@@ -1271,7 +1271,7 @@ var SwalPortalDirective = class _SwalPortalDirective {
   });
 })();
 function provideDefaultSwal() {
-  return import("./sweetalert2.all-37D42ADW.js");
+  return import("./sweetalert2.all-COIJR56V.js");
 }
 var SweetAlert2Module = class _SweetAlert2Module {
   static forRoot(options = {}) {

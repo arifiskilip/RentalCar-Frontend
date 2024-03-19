@@ -1,3 +1,4 @@
+import { AccountEditComponent } from './components/account/account-edit/account-edit.component';
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { CarsComponent } from './components/cars/cars.component';
@@ -29,6 +30,7 @@ const routes: Routes = [
 {path:"account",component:AccountLayoutComponent, children:[
   {path:"login",component:AccountLoginComponent, canActivate:[LoginGuard]},
   {path:"register",component:AccountRegisterComponent},
+  {path:"edit",component:AccountEditComponent, canActivate:[LoginGuard]},
 ]}
 ];
 

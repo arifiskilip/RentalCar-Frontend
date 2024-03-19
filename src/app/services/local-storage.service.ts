@@ -15,6 +15,7 @@ export class LocalStorageService {
     localStorage.clear();
   }
   get(){
-    localStorage.getItem("token");
+    var token = localStorage.getItem("token");
+    return token;
   }
 }

@@ -27,6 +27,7 @@ import { AccountLayoutComponent } from './components/account/account-layout/acco
 import { AccountLoginComponent } from './components/account/account-login/account-login.component';
 import { AccountRegisterComponent } from './components/account/account-register/account-register.component';
 import { AuthInterceptor } from './interceptors/auth.interceptor';
+import { AccountEditComponent } from './components/account/account-edit/account-edit.component';
 
 
 @NgModule({
@@ -50,6 +51,7 @@ import { AuthInterceptor } from './interceptors/auth.interceptor';
     AccountLayoutComponent,
     AccountLoginComponent,
     AccountRegisterComponent,
+    AccountEditComponent,
   ],
   imports: [
     BrowserModule,

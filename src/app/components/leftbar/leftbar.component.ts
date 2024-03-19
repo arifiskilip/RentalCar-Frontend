@@ -4,6 +4,7 @@ import { Color } from '../../models/color';
 import { Brand } from '../../models/brand';
 import { ColorService } from '../../services/color.service';
 import { BrandService } from '../../services/brand.service';
+import { AuthService } from '../../services/auth.service';
 
 @Component({
   selector: 'app-leftbar',
@@ -24,8 +25,9 @@ export class LeftbarComponent implements OnInit {
 
   colorResponse:GenericResponse<Color[]>;
   brandResponse:GenericResponse<Brand[]>;
-
-  constructor(private colorService:ColorService, private brandService:BrandService) {
+  auth = this.authService;
+  constructor(private colorService:ColorService, private brandService:BrandService,
+    private authService:AuthService) {
     
   }
 

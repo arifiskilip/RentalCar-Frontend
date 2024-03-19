@@ -21,10 +21,13 @@ export class RentCarComponent implements OnInit {
   }
 
   car:Car;
-  rentDate:Date;
-  returnDate:Date;
+  rentDate:any;
+  returnDate:any;
   carId:number;
+  totalPrice:number=0;
+  vatPrice:number=0;
   tool = new Tools();
+  var:number;
 
  constructor(private router:Router, private activatedRoute:ActivatedRoute, 
    private carService:CarService,private toastr:ToastrService) {
@@ -49,5 +52,11 @@ export class RentCarComponent implements OnInit {
        this.car = res.data
      }
    });
+ }
+
+ totalPriceCalculate(){
+  var days = Math.abs(new Date(this.returnDate).getUTCDay() - 
+  new Date(this.rentDate).getUTCDay());
+  this.totalPrice = (this.car.dailyPrice * (days+1));
  }
 }

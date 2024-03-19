@@ -6,6 +6,7 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { RentalService } from '../../services/rental.service';
 import { CarService } from '../../services/car.service';
 import { ToastrService } from 'ngx-toastr';
+import { AuthService } from '../../services/auth.service';
 
 @Component({
   selector: 'app-cars',
@@ -51,12 +52,12 @@ export class CarsComponent implements OnInit{
   cars: GenericResponse<Car[]>;
   selectedCarDetails: Car;
   searchText:string="";
-  
 
   constructor( private carService: CarService,
     private activatedRoute: ActivatedRoute,
     private rentalService:RentalService,
-    private router:Router, private toastr:ToastrService) {
+    private router:Router, private toastr:ToastrService,
+    private authService:AuthService) {
     
   }
 
@@ -90,12 +91,18 @@ export class CarsComponent implements OnInit{
   }
 
   cehckCarRental(cardId:number){
-     this.rentalService.checkCarRental(cardId).subscribe(res=>{
-          this.router.navigateByUrl("rentcar/"+cardId)
-    },err=>{
-      console.log(err)
-      this.toastr.warning(err.error.message)
-    })
+    if(this.authService.isAuthenticated()){
+      this.rentalService.checkCarRental(cardId).subscribe(res=>{
+        this.router.navigateByUrl("rentcar/"+cardId)
+  },err=>{
+    console.log(err)
+    this.toastr.warning(err.error.message)
+  })
+    }
+    else{
+      this.toastr.warning("Araç kiralama işlemlerine devam edebilmek için lütfen sisteme giriş yapıınız.","Uayrı");
+    }
+    
 }
 
 }

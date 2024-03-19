@@ -1,0 +1,4 @@
+.selected-image {
+    max-width: 200px; /* Maksimum genişlik */
+    max-height: 200px; /* Maksimum yükseklik */
+  }

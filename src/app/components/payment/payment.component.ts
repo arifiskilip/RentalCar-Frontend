@@ -1,3 +1,4 @@
+import { CustomerService } from './../../services/customer.service';
 import { Component, OnInit } from "@angular/core";
 import { CreditCard } from "../../models/creditCard";
 import { FormBuilder, FormGroup, Validators } from "@angular/forms";
@@ -6,6 +7,7 @@ import { CreditCardService } from "../../services/credit-card.service";
 import { ActivatedRoute, Router } from "@angular/router";
 import { Rental } from "../../models/rental";
 import { RentalService } from "../../services/rental.service";
+import { AuthService } from "../../services/auth.service";
 
 @Component({
   selector: "app-payment",
@@ -32,7 +34,9 @@ export class PaymentComponent implements OnInit {
     private creditCartService: CreditCardService,
     private activatedRoute: ActivatedRoute,
     private rentalService: RentalService,
-    private router: Router
+    private router: Router,
+    private authService:AuthService,
+    private customerService:CustomerService
   ) {}
   createCreditCardkForm() {
     this.creditCardForm = this.formBuilder.group({
@@ -47,13 +51,16 @@ export class PaymentComponent implements OnInit {
     if (this.creditCardForm.valid) {
       var creditCard: CreditCard = Object.assign({}, this.creditCardForm.value);
       this.creditCartService.checkCreditCard(creditCard).subscribe((res) => {
-        this.rental.customerId = 2;
-        this.rentalService.add(this.rental).subscribe((res) => {
-            this.toastr.success(res.message, "Başarılı");
-            this.router.navigateByUrl(`/paymentdetail/${res.data.id}`);
-        },err=>{
-          console.log(err);
-        });
+        this.customerService.getUserIdByCustomer(this.authService.getUserId()).subscribe(res=>{
+          this.rental.customerId = res.data.id;
+          this.rentalService.add(this.rental).subscribe((res) => {
+              this.toastr.success(res.message, "Başarılı");
+              this.router.navigateByUrl(`/paymentdetail/${res.data.id}`);
+          },err=>{
+            console.log(err);
+          });
+        })
+       
       },err =>{
         console.log(err);
         this.toastr.error(err.error.message, "Hata");
